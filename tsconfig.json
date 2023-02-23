@@ -1,0 +1,33 @@
+// {
+//     "compilerOptions": {
+//       "baseUrl": "src",
+//       "rootDirs": ["src"],
+//       "outDir": "dist",
+//       "lib": ["es2020"],
+//       "target": "es6",
+//       "module": "ESNext",
+//       "moduleResolution": "node",
+//       "resolveJsonModule": true,
+//       "esModuleInterop": true,
+//       "types": ["node"],
+//     },
+//     "ts-node": {
+//       "esm": true
+//     },
+//     "include": [
+//       "src/**/*",
+//     ],
+//   }
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "baseUrl": "./src",
+    "esModuleInterop": true
+  },
+  "ts-node": {
+    "esm": true
+  }
+}
