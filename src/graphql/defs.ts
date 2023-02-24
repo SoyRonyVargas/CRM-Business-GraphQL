@@ -8,6 +8,16 @@ const typeDefs = `#graphql
     creado: String
   }
 
+  type Producto {
+    descripcion: String
+    existencias: Int
+    imagen: String
+    nombre: String
+    creado: String
+    precio: Float
+    marca: String
+  }
+
   type Book {
     title: String
     author: String
@@ -34,8 +44,15 @@ const typeDefs = `#graphql
   }
 
   type Mutation {
+    
+    # USUARIOS
     nuevoUsuario( input: CrearUsuario ): Usuario
     authUsuario( input: AuthUsuario ): Token
+
+    # PRODUCTOS
+
+    crearProducto( input  )
+
   }
 
   type Query {
