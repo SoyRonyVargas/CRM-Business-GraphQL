@@ -3,7 +3,7 @@ const typeDefs = `#graphql
   type Usuario {
     id: ID
     nombre: String
-    apellido: String
+    apellidos: String
     email: String
     creado: String
   }
@@ -13,24 +13,34 @@ const typeDefs = `#graphql
     author: String
   }
   
+  type Token {
+    token: String
+  }
+
+  input AuthUsuario {
+    password: String
+    email: String
+  }
+
   input BookInput {
     name: String
   }
 
   input CrearUsuario {
     nombre: String
-    apellido: String
+    apellidos: String
     email: String
     password: String
   }
 
   type Mutation {
     nuevoUsuario( input: CrearUsuario ): Usuario
+    authUsuario( input: AuthUsuario ): Token
   }
 
   type Query {
     books: [Book]
-    obtenerLibro( input : BookInput ): [Book]
+    obtenerUsuario( input : String! ): Usuario
   }
   
 `;
