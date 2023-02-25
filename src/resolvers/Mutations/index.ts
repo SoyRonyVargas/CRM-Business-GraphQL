@@ -1,5 +1,7 @@
+import ProductMutations from './Producto'
 import UserMutations from './User'
 
 export default {
-    ...UserMutations
+    ...ProductMutations,
+    ...UserMutations,
 }

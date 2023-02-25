@@ -15,7 +15,15 @@ const typeDefs = `#graphql
     nombre: String
     creado: String
     precio: Float
-    marca: String
+    id: ID
+  }
+
+  input CrearProducto {
+    descripcion: String!
+    existencias: Int!
+    imagen: String!
+    nombre: String!
+    precio: Float!
   }
 
   type Book {
@@ -51,7 +59,7 @@ const typeDefs = `#graphql
 
     # PRODUCTOS
 
-    crearProducto( input  )
+    crearProducto( input: CrearProducto ) : Producto
 
   }
 
