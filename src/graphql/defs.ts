@@ -8,7 +8,7 @@ const typeDefs = `#graphql
     creado: String
   }
 
-  type Producto {
+  type Producto  {
     descripcion: String
     existencias: Int
     imagen: String
@@ -19,6 +19,15 @@ const typeDefs = `#graphql
   }
 
   input CrearProducto {
+    descripcion: String!
+    existencias: Int!
+    imagen: String!
+    nombre: String!
+    precio: Float!
+  }
+  
+  input ActualizarProducto {
+    id: ID!
     descripcion: String!
     existencias: Int!
     imagen: String!
@@ -60,12 +69,20 @@ const typeDefs = `#graphql
     # PRODUCTOS
 
     crearProducto( input: CrearProducto ) : Producto
+    actualizarProducto( input: ActualizarProducto ) : Producto
+    eliminarProducto( input: String! ) : Boolean
 
   }
 
   type Query {
-    books: [Book]
+    
+    # USUARIOS
     obtenerUsuario( input : String! ): Usuario
+    
+    # PRODUCTOS
+    obtenerProductos: [Producto]
+    obtenerProducto( input: String! ): Producto
+
   }
   
 `;

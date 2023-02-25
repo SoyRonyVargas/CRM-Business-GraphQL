@@ -1,6 +1,6 @@
-import { AuthUsuario, CrearUsuario } from "../../../modelos/Usuario/types"
+import { AuthUsuario, CrearUsuario } from "../../../models/usuario/types"
 import comparePassword from "../../../utils/comparePassword"
-import { UsuarioModel } from "../../../modelos/Usuario"
+import { UsuarioModel } from "../../../models/usuario"
 import hashPassword from "../../../utils/hashPassword"
 import crearToken from "../../../utils/crearToken"
 import { GraphQLError } from "graphql"

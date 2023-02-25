@@ -1,5 +1,5 @@
 import verificarToken from "../../../utils/verificarToken";
-import { UsuarioModel } from "../../../modelos/Usuario";
+import { UsuarioModel } from "../../../models/usuario";
 import { GenInput } from "types"
 
 

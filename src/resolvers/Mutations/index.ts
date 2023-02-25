@@ -1,5 +1,5 @@
-import ProductMutations from './Producto'
-import UserMutations from './User'
+import ProductMutations from './producto'
+import UserMutations from './user'
 
 export default {
     ...ProductMutations,

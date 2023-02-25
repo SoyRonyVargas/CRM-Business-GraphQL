@@ -1,5 +1,5 @@
-import { UsuarioPayload } from "../modelos/Usuario/types"
-import jsonwebtoken, { JwtPayload } from "jsonwebtoken"
+import { UsuarioPayload } from "../models/usuario/types"
+import jsonwebtoken from "jsonwebtoken"
 
 const verificarToken = ( token : string ) : UsuarioPayload | null => {
   

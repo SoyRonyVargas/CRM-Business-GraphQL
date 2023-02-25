@@ -1,9 +1,11 @@
+import 'module-alias/register'
 import { startStandaloneServer } from '@apollo/server/standalone'
 import { ApolloServer } from '@apollo/server'
 import conectarBaseDeDatos from './config/db'
 import typeDefs from './graphql/defs'
 import resolvers from './resolvers'
 import dotenv from 'dotenv'
+
 
 // VARIABLES DE ENTORNO
 

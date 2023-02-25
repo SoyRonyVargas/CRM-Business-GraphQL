@@ -1,5 +1,5 @@
-import Mutations from "./Mutations";
-import Querys from "./Querys";
+import Mutations from "./mutations";
+import Querys from "./querys";
 
 const books = [
     {

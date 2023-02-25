@@ -1,4 +1,4 @@
-import { CrearUsuario , UsuarioPayload } from '../modelos/Usuario/types'
+import { CrearUsuario , UsuarioPayload } from '../models/usuario/types'
 import jsonwebtoken , { SignOptions } from 'jsonwebtoken'
 
 const crearToken = ( payload : CrearUsuario ) : string | null => {
