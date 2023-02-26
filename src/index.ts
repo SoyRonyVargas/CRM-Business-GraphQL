@@ -4,6 +4,8 @@ import { ApolloServer } from '@apollo/server'
 import conectarBaseDeDatos from './config/db'
 import typeDefs from './graphql/defs'
 import resolvers from './resolvers'
+import { ContextApp } from 'types'
+import ContextFn from './context'
 import dotenv from 'dotenv'
 
 
@@ -18,13 +20,14 @@ const main = async () => {
     await conectarBaseDeDatos()
 
     // Servidor 
-    const server = new ApolloServer({
+    const server = new ApolloServer<ContextApp>({
         resolvers,
         typeDefs,
     });
 
-    const r = await startStandaloneServer(server, {
+    const r = await startStandaloneServer( server, {
         listen: { port: 4000 },
+        context: ContextFn
     })
     
     console.log(`🚀 Server ready at: ${r.url}`)

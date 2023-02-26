@@ -35,11 +35,29 @@ const typeDefs = `#graphql
     precio: Float!
   }
 
-  type Book {
-    title: String
-    author: String
+  # CLIENTES
+
+  type Cliente {
+    vendedor: ID
+    telefono: String
+    apellido: String
+    empresa: String
+    nombre: String
+    creado: String
+    email: String
+    edad: Int
+    id: ID
   }
-  
+ 
+  input CrearCliente {
+    telefono: String!
+    apellido: String!
+    empresa: String!
+    nombre: String!
+    email: String!
+    edad: Int!
+  }
+
   type Token {
     token: String
   }
@@ -47,10 +65,6 @@ const typeDefs = `#graphql
   input AuthUsuario {
     password: String
     email: String
-  }
-
-  input BookInput {
-    name: String
   }
 
   input CrearUsuario {
@@ -71,6 +85,10 @@ const typeDefs = `#graphql
     crearProducto( input: CrearProducto ) : Producto
     actualizarProducto( input: ActualizarProducto ) : Producto
     eliminarProducto( input: String! ) : Boolean
+
+    # CLIENTES
+
+    crearCliente( input: CrearCliente ): Cliente
 
   }
 

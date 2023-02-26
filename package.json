@@ -16,7 +16,8 @@
     "@models": "dist/models",
     "@utils": "dist/utils",
     "@types": "dist/types",
-    "@config": "dist/config"
+    "@config": "dist/config",
+    "@context": "dist/context"
   },
   "keywords": [],
   "author": "",

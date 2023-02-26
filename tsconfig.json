@@ -15,7 +15,8 @@
       "@models/*": ["models/*"],
       "@utils/*": ["utils/*"],
       "@types/*": ["types/*"],
-      "@config/*": ["config/*"]
+      "@config/*": ["config/*"],
+      "@context/*": ["context/*"]
       // "~/*": ["./*"],
       // "@/*": [
       //   "./src/*",

@@ -28,3 +28,5 @@ const UsuarioSchema = new mongoose.Schema({
 })
 
 export const UsuarioModel = mongoose.model('Usuario', UsuarioSchema);
+
+export type Usuario = typeof UsuarioModel.schema.obj
