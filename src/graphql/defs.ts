@@ -1,5 +1,10 @@
 const typeDefs = `#graphql
 
+  type Basic {
+    id: ID
+    nombre: String
+  }
+
   type Usuario {
     id: ID
     nombre: String
@@ -37,14 +42,37 @@ const typeDefs = `#graphql
 
   # CLIENTES
 
-  type Cliente {
-    vendedor: ID
+  interface ICliente {
     telefono: String
     apellido: String
     empresa: String
     nombre: String
     creado: String
     email: String
+    edad: Int
+    id: ID
+  }
+
+  type ClienteFull implements ICliente {
+    telefono: String
+    apellido: String
+    empresa: String
+    vendedor: Basic
+    nombre: String
+    creado: String
+    email: String
+    edad: Int
+    id: ID
+  }
+
+  type ClienteLight implements ICliente {
+    telefono: String
+    apellido: String
+    empresa: String
+    nombre: String
+    creado: String
+    email: String
+    vendedor: ID
     edad: Int
     id: ID
   }
@@ -57,6 +85,19 @@ const typeDefs = `#graphql
     email: String!
     edad: Int!
   }
+  
+  input ActualizarCliente {
+    telefono: String!
+    apellido: String!
+    empresa: String!
+    nombre: String!
+    email: String!
+    vendedor: ID!
+    edad: Int!
+    id: ID!
+  }
+
+  # AUTENTICACION
 
   type Token {
     token: String
@@ -74,6 +115,8 @@ const typeDefs = `#graphql
     password: String
   }
 
+  # QUERY Y MUTATION
+
   type Mutation {
     
     # USUARIOS
@@ -88,7 +131,9 @@ const typeDefs = `#graphql
 
     # CLIENTES
 
-    crearCliente( input: CrearCliente ): Cliente
+    actualizarCliente( input: ActualizarCliente ): ClienteLight
+    crearCliente( input: CrearCliente ): ClienteLight
+    eliminarCliente( input: ID! ): Boolean
 
   }
 
@@ -100,6 +145,11 @@ const typeDefs = `#graphql
     # PRODUCTOS
     obtenerProductos: [Producto]
     obtenerProducto( input: String! ): Producto
+
+    # CLIENTES
+    obtenerCliente( input: String! ): ClienteFull
+    obtenerClientesVendedor: [ClienteFull]
+    obtenerClientes: [ClienteFull]
 
   }
   

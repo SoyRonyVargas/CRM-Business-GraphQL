@@ -1,4 +1,4 @@
-import { ProductoModel , Producto } from "@models/producto";
+import { ProductoModel , Producto } from "../../../models/producto";
 import { GraphQLError } from "graphql";
 import { GenInput } from "types";
 

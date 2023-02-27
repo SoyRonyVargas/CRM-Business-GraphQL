@@ -11,4 +11,4 @@ export type GenInput<T> = {
     input: T
 }
 
-export type BasicResolver<T> = ( _ : any , x : GenInput<T> , context: ContextApp ) => any;
+export type BasicResolver<T> = ( _ : any , x : GenInput< T | null > , context: ContextApp ) => any;

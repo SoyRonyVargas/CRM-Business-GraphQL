@@ -1,5 +1,5 @@
 import mongoose, { Document, Schema } from "mongoose";
-import { Usuario } from "@models/usuario";
+import { Usuario } from "../../models/usuario";
 
 interface ICliente extends Document {
     vendedor: string | Usuario
@@ -14,6 +14,11 @@ interface ICliente extends Document {
 
 const ClienteSchema = new mongoose.Schema({
     nombre: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    apellido: {
         type: String,
         required: true,
         trim: true

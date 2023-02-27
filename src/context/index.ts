@@ -1,11 +1,11 @@
-import verificarToken from "@utils/verificarToken"
+import verificarToken from "../utils/verificarToken"
 import { GraphQLError } from "graphql";
 import {IContext } from "types"
 
 const ContextFn : IContext = async ({ req , res }) => {
   
     const token : string = req.headers['authorization'];
-    const routeAuth = req.headers['auth'] || null;
+    // const rosuteAuth = req.headers['auth'] || null;
 
     // console.log( !token );
     // console.log( routeAuth );

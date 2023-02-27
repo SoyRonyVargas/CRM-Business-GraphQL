@@ -1,5 +1,5 @@
-import { ActualizarProducto, CrearProducto } from "@models/producto/types";
-import { ProductoModel } from "@models/producto";
+import { ActualizarProducto, CrearProducto } from "../../../models/producto/types";
+import { ProductoModel } from "../../../models/producto";
 import { GraphQLError } from "graphql";
 import { GenInput } from "types";
 
