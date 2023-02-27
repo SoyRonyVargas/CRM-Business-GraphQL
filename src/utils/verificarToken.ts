@@ -15,6 +15,7 @@ const verificarToken = ( token : string ) : UsuarioPayload | null => {
     {
 
         console.error("JWT No valido");
+        console.error(err);
 
         return null;
 

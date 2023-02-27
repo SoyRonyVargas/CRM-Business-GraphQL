@@ -1,4 +1,4 @@
-import { CrearCliente } from "@models/clientes/types";
+import { CrearCliente } from "../../../models/clientes/types";
 import { ClienteModel } from "@models/clientes";
 import { GraphQLError } from "graphql";
 import { BasicResolver } from "types";

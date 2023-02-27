@@ -10,15 +10,15 @@ const ContextFn : IContext = async ({ req , res }) => {
     // console.log( !token );
     // console.log( routeAuth );
     
-    if( !(routeAuth === "1") && !token )
-    {
-        throw new GraphQLError('Error de autenticacion', {
-            extensions: {
-              code: 'BAD_REQUEST',
-              http: { status: 401 },
-            }
-        });
-    }
+    // if( !(routeAuth === "1") && !token )
+    // {
+    //     throw new GraphQLError('Error de autenticacion', {
+    //         extensions: {
+    //           code: 'BAD_REQUEST',
+    //           http: { status: 401 },
+    //         }
+    //     });
+    // }
     
     if( token )
     {
