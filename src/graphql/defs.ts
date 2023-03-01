@@ -4,6 +4,11 @@ const typeDefs = `#graphql
     id: ID
     nombre: String
   }
+  
+  input BasicInput {
+    id: ID
+    nombre: String
+  }
 
   type Usuario {
     id: ID
@@ -17,6 +22,14 @@ const typeDefs = `#graphql
     descripcion: String
     existencias: Int
     imagen: String
+    nombre: String
+    creado: String
+    precio: Float
+    id: ID
+  }
+  
+  input InputProducto  {
+    descripcion: String
     nombre: String
     creado: String
     precio: Float
@@ -115,6 +128,70 @@ const typeDefs = `#graphql
     password: String
   }
 
+  # ORDEN VENTA
+
+  interface IOrdenVenta {
+    fecha_entrega: String
+    titulo_venta: String
+    subtotal: Float
+    creado: String
+    total: Float
+    status: Int
+  }
+
+  input InputOrdenVentaConcepto {
+    cantidad: Int!
+    importe: Int!
+    producto: ID!
+  }
+  
+  type OrdenVentaConcepto {
+    producto: Producto
+    creado: String
+    cantidad: Int
+    importe: Int
+    status: Int
+    id: ID
+  }
+
+  input CrearOrdenVenta {
+    fecha_entrega: String!
+    titulo_venta: String!
+    subtotal: Float!
+    creado: String!
+    vendedor: ID!
+    total: Float!
+    cliente: ID!
+    status: Int!
+    conceptos: [InputOrdenVentaConcepto]!
+  }
+
+  type OrdenVentaLight implements IOrdenVenta {
+    conceptos: [ID]
+    fecha_entrega: String
+    titulo_venta: String
+    subtotal: Float
+    creado: String
+    vendedor: ID
+    cliente: ID
+    total: Float
+    status: Int
+    id: ID
+  }
+  
+  type OrdenVentaFull implements IOrdenVenta {
+    conceptos: [OrdenVentaConcepto]
+    fecha_entrega: String
+    titulo_venta: String
+    subtotal: Float
+    creado: String
+    vendedor: Basic
+    cliente: Basic
+    total: Float
+    status: Int
+    id: ID
+  }
+
   # QUERY Y MUTATION
 
   type Mutation {
@@ -135,12 +212,16 @@ const typeDefs = `#graphql
     crearCliente( input: CrearCliente ): ClienteLight
     eliminarCliente( input: ID! ): Boolean
 
+    # ORDEN VENTA
+
+    crearOrdenVenta(input: CrearOrdenVenta): OrdenVentaLight
+
   }
 
   type Query {
     
     # USUARIOS
-    obtenerUsuario( input : String! ): Usuario
+    obtenerUsuario( input: String! ): Usuario
     
     # PRODUCTOS
     obtenerProductos: [Producto]
@@ -150,6 +231,9 @@ const typeDefs = `#graphql
     obtenerCliente( input: String! ): ClienteFull
     obtenerClientesVendedor: [ClienteFull]
     obtenerClientes: [ClienteFull]
+
+    # ORDENES VENTAS
+    obtenerOrdenesVentaUsuario: [OrdenVentaFull]
 
   }
   
