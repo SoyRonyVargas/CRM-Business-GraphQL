@@ -165,6 +165,17 @@ const typeDefs = `#graphql
     status: Int!
     conceptos: [InputOrdenVentaConcepto]!
   }
+  
+  input InputOrdenVentasQuery {
+    fecha_inicio: String!
+    fecha_fin: String!
+    status: Int!
+  }
+
+  input ActualizarOrdenVenta {
+    status: Int!
+    id: ID!
+  }
 
   type OrdenVentaLight implements IOrdenVenta {
     conceptos: [ID]
@@ -226,6 +237,7 @@ const typeDefs = `#graphql
 
     # ORDEN VENTA
     crearOrdenVenta(input: CrearOrdenVenta): OrdenVentaLight
+    actualizarOrdenVenta(input: ActualizarOrdenVenta): OrdenVentaLight
 
     # ENTRADA ALMACEN
     crearEntradaAlmacen(input:CreateEntradaAlmacen): Boolean
@@ -247,7 +259,7 @@ const typeDefs = `#graphql
     obtenerClientes: [ClienteFull]
 
     # ORDENES VENTAS
-    obtenerOrdenesVentaUsuario: [OrdenVentaFull]
+    obtenerOrdenesVentaUsuario(input: InputOrdenVentasQuery): [OrdenVentaFull]
     obtenerOrdenenPorId( input: ID! ): OrdenVentaFull
 
   }

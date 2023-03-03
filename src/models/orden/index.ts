@@ -1,5 +1,5 @@
-import { populateFields } from "../../utils/populateFields";
-import mongoose, { Schema } from "mongoose";
+// import { populateFields } from "../../utils/populateFields";
+import mongoose, { Schema , Document } from "mongoose";
 
 export interface IOrdenVenta extends Document {
     

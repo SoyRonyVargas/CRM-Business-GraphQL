@@ -1,5 +1,5 @@
-import { OrdenVentaConcepto , IOrdenVentaConcepto } from "./concepto"
-import {  OrdenVenta } from "."
+import { IOrdenVentaConcepto } from "./concepto"
+import { OrdenVenta, IOrdenVenta } from "."
 
 export type CrearOrdenVenta = Pick<
     OrdenVenta, 
@@ -8,3 +8,18 @@ export type CrearOrdenVenta = Pick<
 {
     conceptos: IOrdenVentaConcepto[]
 }
+
+export type InputOrdenVentasQuery = Pick<
+    OrdenVenta,
+    "status"
+> &
+{
+    fecha_inicio: string
+    fecha_fin: string
+}
+ 
+
+export type ActualizarOrdenVenta = Pick<
+    IOrdenVenta,
+    "id" | "status"
+>

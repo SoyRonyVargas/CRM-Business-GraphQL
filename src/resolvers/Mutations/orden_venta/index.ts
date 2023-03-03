@@ -1,5 +1,5 @@
+import { CrearOrdenVenta , ActualizarOrdenVenta } from "../../../models/orden/types";
 import { OrdenVentaConceptoModel } from "../../../models/orden/concepto";
-import { CrearOrdenVenta } from "../../../models/orden/types";
 import { OrdenVentaModel } from "../../../models/orden";
 import { AlmacenModel } from "../../../models/almacen";
 import handleError from "../../../utils/handleError";
@@ -114,7 +114,7 @@ const crearOrdenVenta : BasicResolver<CrearOrdenVenta> = async ( _ , { input } ,
         
         console.log(orden);
 
-        // await orden.save()
+        await orden.save()
 
         return orden
 
@@ -127,6 +127,35 @@ const crearOrdenVenta : BasicResolver<CrearOrdenVenta> = async ( _ , { input } ,
 
 }
 
+const actualizarOrdenVenta : BasicResolver<ActualizarOrdenVenta> = async ( _ , { input } , context ) => {
+
+    try
+    {
+
+        const { id } = input
+
+        const orden = await OrdenVentaModel.findById(id)
+
+        if( !orden ) return handleError({
+            msg: "Orden no encontrada",
+            status: "404"
+        })
+
+        orden.status = input.status
+
+        await orden.save()
+
+        return orden
+
+    }
+    catch(err)
+    {
+        return handleError(err)
+    }
+
+}
+
 export default {
+    actualizarOrdenVenta,
     crearOrdenVenta
 }
