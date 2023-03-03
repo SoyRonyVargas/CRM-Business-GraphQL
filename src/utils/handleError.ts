@@ -18,14 +18,12 @@ const handleError = ( config : Config = DefaultConfig ) => {
     
     const { msg , status } = config
 
-    throw new GraphQLError( msg , {
+    return new GraphQLError( msg , {
         extensions: {
           code: 'BAD_REQUEST',
           http: { status },
         }
     });
-
-    return 
 
 }
 

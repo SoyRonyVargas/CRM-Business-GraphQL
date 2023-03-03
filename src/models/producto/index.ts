@@ -9,7 +9,7 @@ interface IProducto extends Document {
     creado: string
 }
 
-const ProductoSchema = new mongoose.Schema({
+export const ProductoSchema = new mongoose.Schema({
     nombre: {
         type: String,
         required: true,

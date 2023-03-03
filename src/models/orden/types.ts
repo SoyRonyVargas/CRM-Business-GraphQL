@@ -1,4 +1,4 @@
-import { OrdenVentaConcepto } from "./concepto"
+import { OrdenVentaConcepto , IOrdenVentaConcepto } from "./concepto"
 import {  OrdenVenta } from "."
 
 export type CrearOrdenVenta = Pick<
@@ -6,5 +6,5 @@ export type CrearOrdenVenta = Pick<
     "titulo_venta" | "vendedor" | "cliente" | "fecha_entrega" | "subtotal" | "total" | "status"
 > & 
 {
-    conceptos: OrdenVentaConcepto[]
+    conceptos: IOrdenVentaConcepto[]
 }

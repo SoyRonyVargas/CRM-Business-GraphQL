@@ -1,7 +1,7 @@
 import { Producto } from "../../producto";
 import mongoose, { Schema } from "mongoose";
 
-interface IOrdenVentaConcepto extends Document {
+export interface IOrdenVentaConcepto extends Document {
     producto: Producto
     cantidad: number
     importe: number

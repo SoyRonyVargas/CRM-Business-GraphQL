@@ -1,3 +1,4 @@
+import { populateFields } from "../../utils/populateFields";
 import mongoose, { Schema } from "mongoose";
 
 export interface IOrdenVenta extends Document {
@@ -58,6 +59,8 @@ const OrdenVentaSchema = new mongoose.Schema({
         default: Date.now
     }
 })
+
+// OrdenVentaSchema.plugin(populateFields)
 
 export const OrdenVentaModel = mongoose.model<IOrdenVenta>('OrdenVenta', OrdenVentaSchema);
 

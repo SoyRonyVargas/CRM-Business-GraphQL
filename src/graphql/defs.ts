@@ -192,6 +192,18 @@ const typeDefs = `#graphql
     id: ID
   }
 
+  # ENTRADAS ALMACEN
+
+  input InputConceptoEntrada {
+    id_usuario_creado: String
+    cantidad_entrada: Int
+    id_producto: String
+  }
+
+  input CreateEntradaAlmacen {
+    conceptos: [InputConceptoEntrada]
+  }
+
   # QUERY Y MUTATION
 
   type Mutation {
@@ -213,8 +225,10 @@ const typeDefs = `#graphql
     eliminarCliente( input: ID! ): Boolean
 
     # ORDEN VENTA
-
     crearOrdenVenta(input: CrearOrdenVenta): OrdenVentaLight
+
+    # ENTRADA ALMACEN
+    crearEntradaAlmacen(input:CreateEntradaAlmacen): Boolean
 
   }
 
@@ -234,6 +248,7 @@ const typeDefs = `#graphql
 
     # ORDENES VENTAS
     obtenerOrdenesVentaUsuario: [OrdenVentaFull]
+    obtenerOrdenenPorId( input: ID! ): OrdenVentaFull
 
   }
   
