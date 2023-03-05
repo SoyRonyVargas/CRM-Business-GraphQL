@@ -2,6 +2,7 @@ import { AuthUsuario, CrearUsuario } from "../../../models/usuario/types"
 import comparePassword from "../../../utils/comparePassword"
 import { UsuarioModel } from "../../../models/usuario"
 import hashPassword from "../../../utils/hashPassword"
+import handleError from "../../../utils/handleError"
 import crearToken from "../../../utils/crearToken"
 import { GraphQLError } from "graphql"
 import { GenInput } from "types"
@@ -16,9 +17,10 @@ const authUsuario = async ( _ , { input } : GenInput<AuthUsuario> ) => {
 
     if( !usuario )
     {
-        throw new GraphQLError("Usuario no valido" , {
-            extensions: { code: 'BAD_USER_INPUT' },
-        })   
+        return handleError({
+          msg: "Usuario no valido",
+          status: "BAD_REQUEST"
+        })
     }
     
     // SI EL PASSWORD HACE MATCH 

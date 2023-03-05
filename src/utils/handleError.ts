@@ -22,7 +22,7 @@ const handleError = ( config : Config = DefaultConfig ) => {
         extensions: {
           code: 'BAD_REQUEST',
           http: { status },
-        }
+        },
     });
 
 }

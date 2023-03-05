@@ -30,7 +30,7 @@ const ContextFn : IContext = async ({ req , res }) => {
             throw new GraphQLError('Error de autenticacion', {
                 extensions: {
                 code: 'BAD_REQUEST',
-                http: { status: 401 },
+                http: { status: 200 },
                 }
             });
         }
