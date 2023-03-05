@@ -44,6 +44,11 @@ const ClienteSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    rfc: {
+        type: String,
+        required: true,
+        trim: true
+    },
     vendedor: {
         type: Schema.Types.ObjectId,
         required: true,

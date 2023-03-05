@@ -12,12 +12,7 @@ const crearCliente : BasicResolver<CrearCliente> = async ( _ , { input } , conte
 
         const existeCliente = await ClienteModel.findOne({ email })
 
-        if( existeCliente ) return new GraphQLError('Error el cliente ya existe', {
-            extensions: {
-              code: 'BAD_REQUEST',
-              http: { status: 401 },
-            }
-        });
+        if( existeCliente ) return new GraphQLError('Error el cliente ya existe');
         
         const clienteNuevo = new ClienteModel(input)
 

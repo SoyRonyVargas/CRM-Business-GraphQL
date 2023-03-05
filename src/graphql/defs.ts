@@ -62,6 +62,7 @@ const typeDefs = `#graphql
     nombre: String
     creado: String
     email: String
+    rfc: String
     edad: Int
     id: ID
   }
@@ -74,6 +75,7 @@ const typeDefs = `#graphql
     nombre: String
     creado: String
     email: String
+    rfc: String
     edad: Int
     id: ID
   }
@@ -86,6 +88,7 @@ const typeDefs = `#graphql
     creado: String
     email: String
     vendedor: ID
+    rfc: String
     edad: Int
     id: ID
   }
@@ -96,6 +99,7 @@ const typeDefs = `#graphql
     empresa: String!
     nombre: String!
     email: String!
+    rfc: String!
     edad: Int!
   }
   
@@ -106,6 +110,7 @@ const typeDefs = `#graphql
     nombre: String!
     email: String!
     vendedor: ID!
+    rfc: String!
     edad: Int!
     id: ID!
   }
