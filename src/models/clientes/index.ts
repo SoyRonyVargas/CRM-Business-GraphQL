@@ -8,6 +8,7 @@ interface ICliente extends Document {
     empresa: string
     nombre: string
     creado: string
+    status: number
     email: number
     edad: number
 }
@@ -48,6 +49,11 @@ const ClienteSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
+    },
+    status: {
+        type: Number,
+        required: true,
+        default: 0,
     },
     vendedor: {
         type: Schema.Types.ObjectId,
