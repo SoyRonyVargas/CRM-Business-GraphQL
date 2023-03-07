@@ -8,6 +8,7 @@
     "dev2": "nodemon --experimental-modules --es-module-specifier-resolution=node src/index.ts",
     "dev": "ts-node-dev --respawn src/index.ts",
     "dev1": "nodemon src/index.ts",
+    "update": "nodemon updateDocs.ts",
     "start": "npm run compile && node ./dist/index.js",
     "build": "npm-run-all clean tsc tsc-alias"
   },

@@ -56,6 +56,7 @@ const typeDefs = `#graphql
   # CLIENTES
 
   interface ICliente {
+    fecha_nacimiento: String
     telefono: String
     apellido: String
     empresa: String
@@ -63,11 +64,11 @@ const typeDefs = `#graphql
     creado: String
     email: String
     rfc: String
-    edad: Int
     id: ID
   }
 
   type ClienteFull implements ICliente {
+    fecha_nacimiento: String
     telefono: String
     apellido: String
     empresa: String
@@ -76,11 +77,11 @@ const typeDefs = `#graphql
     creado: String
     email: String
     rfc: String
-    edad: Int
     id: ID
   }
 
   type ClienteLight implements ICliente {
+    fecha_nacimiento: String
     telefono: String
     apellido: String
     empresa: String
@@ -89,21 +90,21 @@ const typeDefs = `#graphql
     email: String
     vendedor: ID
     rfc: String
-    edad: Int
     id: ID
   }
  
   input CrearCliente {
+    fecha_nacimiento: String!
     telefono: String!
     apellido: String!
     empresa: String!
     nombre: String!
     email: String!
     rfc: String!
-    edad: Int!
   }
   
   input ActualizarCliente {
+    fecha_nacimiento: String!
     telefono: String!
     apellido: String!
     empresa: String!
@@ -111,7 +112,6 @@ const typeDefs = `#graphql
     email: String!
     vendedor: ID!
     rfc: String!
-    edad: Int!
     id: ID!
   }
 

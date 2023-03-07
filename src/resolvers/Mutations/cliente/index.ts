@@ -16,6 +16,8 @@ const crearCliente : BasicResolver<CrearCliente> = async ( _ , { input } , conte
         
         const clienteNuevo = new ClienteModel(input)
 
+        clienteNuevo.fecha_nacimiento = new Date().toString()
+
         clienteNuevo.vendedor = context.authScope
 
         await clienteNuevo.save()

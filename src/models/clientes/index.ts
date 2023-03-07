@@ -3,6 +3,7 @@ import { Usuario } from "../../models/usuario";
 
 interface ICliente extends Document {
     vendedor: string | Usuario
+    fecha_nacimiento: string
     telefono: string
     apellido: string
     empresa: string
@@ -10,10 +11,10 @@ interface ICliente extends Document {
     creado: string
     status: number
     email: number
-    edad: number
+    rfc: string
 }
 
-const ClienteSchema = new mongoose.Schema({
+export const ClienteSchema = new mongoose.Schema({
     nombre: {
         type: String,
         required: true,
@@ -24,11 +25,11 @@ const ClienteSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    edad: {
-        type: Number,
+    fecha_nacimiento: {
+        type: Date,
         required: true,
         trim: true,
-        max: 150
+        default: Date.now
     },
     telefono: {
         type: String,
@@ -64,7 +65,7 @@ const ClienteSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
-})
+}, { strict: false })
 
 export const ClienteModel = mongoose.model<ICliente>('Cliente', ClienteSchema);
 

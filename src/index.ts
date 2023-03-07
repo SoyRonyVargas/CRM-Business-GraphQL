@@ -2,6 +2,7 @@ import 'module-alias/register'
 import { startStandaloneServer } from '@apollo/server/standalone'
 import { ApolloServer } from '@apollo/server'
 import conectarBaseDeDatos from './config/db'
+import ActualizarModelos from './updates'
 import typeDefs from './graphql/defs'
 import resolvers from './resolvers'
 import { ContextApp } from 'types'
@@ -19,6 +20,8 @@ const main = async () => {
 
     await conectarBaseDeDatos()
 
+    await ActualizarModelos()
+
     // Servidor 
     const server = new ApolloServer<ContextApp>({
         resolvers,
@@ -31,6 +34,7 @@ const main = async () => {
     })
     
     console.log(`🚀 Server ready at: ${r.url}`)
+
 
 }
 
