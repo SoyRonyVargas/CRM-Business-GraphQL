@@ -1,4 +1,5 @@
 import { ProductoModel , Producto } from "../../../models/producto";
+import { AlmacenModel } from "../../../models/almacen";
 import { GraphQLError } from "graphql";
 import { GenInput } from "types";
 
@@ -9,12 +10,32 @@ const obtenerProductos = async () => {
         
         const productos : Producto[] = await ProductoModel.find({})
         
+        for( const producto of productos )
+        {
+            
+            const existencias = await AlmacenModel.find({ 
+                id_producto: { $eq: producto.id } 
+            })
+
+            let total_existencias = 0
+
+            for( const existencia of existencias )
+            {
+                total_existencias += existencia.cantidad_restante
+            }
+
+            producto.existencias = total_existencias
+
+        }
+
         return productos
 
     } 
     catch (err) 
     {
         
+        console.log(err);
+
         throw new GraphQLError( err , {
             extensions: { code: 'INTERNAL_SERVER_ERROR' },
         })

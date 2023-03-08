@@ -25,32 +25,27 @@ const typeDefs = `#graphql
     nombre: String
     creado: String
     precio: Float
+    status: Int
     id: ID
   }
   
-  input InputProducto  {
-    descripcion: String
-    nombre: String
-    creado: String
-    precio: Float
-    id: ID
-  }
-
   input CrearProducto {
     descripcion: String!
     existencias: Int!
     imagen: String!
     nombre: String!
     precio: Float!
+    status: Int!
   }
   
   input ActualizarProducto {
-    id: ID!
     descripcion: String!
     existencias: Int!
     imagen: String!
     nombre: String!
     precio: Float!
+    status: Int!
+    id: ID!
   }
 
   # CLIENTES
@@ -238,7 +233,7 @@ const typeDefs = `#graphql
 
     actualizarCliente( input: ActualizarCliente ): ClienteLight
     crearCliente( input: CrearCliente ): ClienteLight
-    eliminarCliente( input: ID! ): Boolean
+    eliminarCliente( input: ID! ): String
 
     # ORDEN VENTA
     crearOrdenVenta(input: CrearOrdenVenta): OrdenVentaLight

@@ -1,12 +1,13 @@
 import mongoose, { Document } from "mongoose";
 
 interface IProducto extends Document {
+    existencias?: number
     descripcion: string
-    existencias: number
     nombre: string
     imagen: string
     precio: number
     creado: string
+    status: number
 }
 
 export const ProductoSchema = new mongoose.Schema({
@@ -25,13 +26,14 @@ export const ProductoSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    existencias: {
-        type: Number,
-        required: true,
-    },
     precio: {
         type: Number,
         required: true,
+    },
+    status: {
+        type: Number,
+        required: true,
+        default: 1
     },
     creado: {
         type: Date,

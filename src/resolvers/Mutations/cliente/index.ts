@@ -1,5 +1,6 @@
 import { ActualizarCliente, CrearCliente } from "../../../models/clientes/types";
 import { ClienteModel } from "../../../models/clientes";
+import handleError from "../../../utils/handleError";
 import { GraphQLError } from "graphql";
 import { BasicResolver } from "types";
 
@@ -50,14 +51,12 @@ const eliminarCliente : BasicResolver<string> = async ( _ , { input } ) => {
 
         if( !query ) return false;
 
-        return true;
+        return input;
         
     } 
     catch (error) 
     {
-        
-        return false;
-
+        return handleError(error)
     }
 
 }
