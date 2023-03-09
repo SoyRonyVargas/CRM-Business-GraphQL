@@ -10,7 +10,8 @@
     "dev1": "nodemon src/index.ts",
     "update": "nodemon updateDocs.ts",
     "start": "npm run compile && node ./dist/index.js",
-    "build": "npm-run-all clean tsc tsc-alias"
+    "build": "npm-run-all clean tsc tsc-alias",
+    "seed": "npx ts-node src/migrations/index.ts"
   },
   "_moduleAliases": {
     "@": "dist",
