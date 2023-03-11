@@ -1,18 +1,46 @@
 import { ActualizarProducto, CrearProducto } from "../../../models/producto/types";
 import { ProductoModel } from "../../../models/producto";
+import handleError from "../../../utils/handleError";
+// import almacenarImagen from "@utils/almacenarImagen";
 import { GraphQLError } from "graphql";
+import { createWriteStream } from "fs";
 import { GenInput } from "types";
+const path = require("path");
 
-const crearProducto = async ( _ , { input } : GenInput<CrearProducto> ) => {
+const crearProducto = async ( _ , { file } : any ) => {
 
     try
     {
+        console.clear()
+        
+        console.log("file");
+        console.log(file);
 
-        const productoNuevo = new ProductoModel(input)
+        const obj = await file
 
-        await productoNuevo.save()
+        console.log('obj');
+        console.log(obj);
+        
+        // const { stream } = await file
 
-        return productoNuevo
+        // console.log("file");
+        // console.log(stream);
+        // console.log("input");
+        // console.log(input);
+        // almacenarImagen(create)
+
+        // await new Promise(res =>
+        //     createReadStream()
+        //       .pipe(createWriteStream(path.join(__dirname, "../images", file.filename)))
+        //       .on("close", res)
+        //   );
+    
+
+        // const productoNuevo = new ProductoModel(input)
+
+        // await productoNuevo.save()
+
+        return {}
 
     }
     catch(err)
@@ -20,12 +48,10 @@ const crearProducto = async ( _ , { input } : GenInput<CrearProducto> ) => {
 
         console.log(err);
 
-        throw new GraphQLError('Error al crear el usuario', {
-            extensions: {
-              code: 'BAD_REQUEST',
-              http: { status: 401 },
-            }
-        });
+        return handleError({
+            msg: "Error al crear el producto",
+            status: "200"
+        })
 
     }
 

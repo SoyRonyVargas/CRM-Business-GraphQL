@@ -6,7 +6,7 @@ const conectarBaseDeDatos = async () => {
     {
      
         await mongoose.connect(process.env.DB , {
-            dbName: "React-Avanzado-GraphQL-test"
+            dbName: "React-Avanzado-GraphQL"
         })
 
         console.log("Base de datos conectada");

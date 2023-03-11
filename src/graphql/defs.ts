@@ -29,18 +29,19 @@ const typeDefs = `#graphql
     id: ID
   }
   
+  scalar Upload
+  
   input CrearProducto {
     descripcion: String!
-    existencias: Int!
-    imagen: String!
     nombre: String!
+    imagen: [Upload]
     precio: Float!
     status: Int!
   }
   
   input ActualizarProducto {
     descripcion: String!
-    existencias: Int!
+    # existencias: Int!
     imagen: String!
     nombre: String!
     precio: Float!
@@ -225,7 +226,8 @@ const typeDefs = `#graphql
 
     # PRODUCTOS
 
-    crearProducto( input: CrearProducto ) : Producto
+    # crearProducto( input: CrearProducto! , file: [Upload] ) : Producto
+    crearProducto( file: [Upload] ) : Producto
     actualizarProducto( input: ActualizarProducto ) : Producto
     eliminarProducto( input: String! ) : Boolean
 

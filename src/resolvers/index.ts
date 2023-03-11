@@ -1,3 +1,4 @@
+const { GraphQLUpload } = require('apollo-upload-server');
 import Mutations from "./mutations";
 import Querys from "./querys";
 
@@ -7,8 +8,8 @@ const resolvers = {
     },
     Mutation: {
       ...Mutations
-    }
-    
+    },
+    Upload: GraphQLUpload
 };
 
 export default resolvers  
