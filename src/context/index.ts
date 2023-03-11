@@ -5,21 +5,7 @@ import { IContext } from "types"
 const ContextFn : IContext = async ({ req , res } ) => {
   
     const token : string = req.headers['authorization'];
-    // const rosuteAuth = req.headers['auth'] || null;
-
-    // console.log( !token );
-    // console.log( routeAuth );
-    
-    // if( !(routeAuth === "1") && !token )
-    // {
-    //     throw new GraphQLError('Error de autenticacion', {
-    //         extensions: {
-    //           code: 'BAD_REQUEST',
-    //           http: { status: 401 },
-    //         }
-    //     });
-    // }
-    
+  
     if( token )
     {
         

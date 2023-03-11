@@ -24,6 +24,8 @@ const obtenerProductos = async () => {
                 total_existencias += existencia.cantidad_restante
             }
 
+            // producto.imagen = parseImagenes(producto.imagen)
+
             producto.existencias = total_existencias
 
         }

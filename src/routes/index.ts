@@ -1,20 +1,27 @@
 
+import parseImagenes from '../utils/parseImagenes';
 import { upload } from '../upload'
 import { Router } from 'express'
 
 const router = Router()
 
-router.post<any , any , any, any, any>( "/upload", upload.array("imagenes"), ( req  , res ) => {
+interface MulterRequest extends Request {
+    files: [
+        {
+            filename: string
+        }
+    ];
+}
+
+router.post( "/upload", upload.array("imagenes"), ( req   , res ) => {
         
-    console.log(req);
-    
-    // console.log(req)
+    const files  = (req as unknown as MulterRequest).files;
+ 
+    const _files = files.map( file => (file.filename))
 
-    // upload( req , res , (err) => {
+    const imagenes = parseImagenes(_files , req)
 
-    // })
-
-    res.send("endopoint listo")
+    res.send(imagenes)
 
 })
 
