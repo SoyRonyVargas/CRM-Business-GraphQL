@@ -61,10 +61,10 @@ const typeDefs = `#graphql
   }
 
   input QueryProductos {
-    nombre: String!
-    precio: Float!
-    status: Int!
-    pagina: Int!
+    nombre: String
+    precio: Float
+    status: Int
+    pagina: Int
   }
 
   # CLIENTES
@@ -158,10 +158,20 @@ const typeDefs = `#graphql
     status: Int
   }
 
-  input InputOrdenVentaConcepto {
+  input ConceptoOrden {
     cantidad: Int!
     importe: Int!
     producto: ID!
+    total: Int!
+  }
+
+  type ConceptoOrdenLight {
+    producto: ID
+    usuario: ID
+    importe: Float
+    cantidad: Int
+    total: Float
+    id: ID
   }
   
   type OrdenVentaConcepto {
@@ -182,7 +192,7 @@ const typeDefs = `#graphql
     total: Float!
     cliente: ID!
     status: Int!
-    conceptos: [InputOrdenVentaConcepto]!
+    conceptos: [ConceptoOrden]!
   }
   
   input InputOrdenVentasQuery {
@@ -234,6 +244,21 @@ const typeDefs = `#graphql
     conceptos: [InputConceptoEntrada]
   }
 
+  # CARRITO
+
+  type Carrito {
+    conceptos: [Concepto]
+  }
+
+  type Concepto {
+    producto: Producto
+    usuario: Basic
+    importe: Float
+    cantidad: Int
+    total: Float
+    id: ID
+  }
+
   # QUERY Y MUTATION
 
   type Mutation {
@@ -261,6 +286,9 @@ const typeDefs = `#graphql
     # ENTRADA ALMACEN
     crearEntradaAlmacen(input:CreateEntradaAlmacen): Boolean
 
+    # CARRITO
+    agregarConceptoCarrito( input:ConceptoOrden ): ConceptoOrdenLight
+
   }
 
   type Query {
@@ -280,6 +308,9 @@ const typeDefs = `#graphql
     # ORDENES VENTAS
     obtenerOrdenesVentaUsuario(input: InputOrdenVentasQuery): [OrdenVentaFull]
     obtenerOrdenenPorId( input: ID! ): OrdenVentaFull
+
+    # CARRITO
+    obtenerCarrito: Carrito
 
   }
   

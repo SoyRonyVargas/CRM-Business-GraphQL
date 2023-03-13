@@ -5,7 +5,7 @@ import { AlmacenModel } from "../../../models/almacen";
 import handleError from "../../../utils/handleError";
 import { BasicResolver } from "types";
 
-const calcularExistenciasProducto = async ( id: string ) : Promise<number> => {
+export const calcularExistenciasProducto = async ( id: string ) : Promise<number> => {
 
     const entradas = await AlmacenModel.find({ 
         id: id,
