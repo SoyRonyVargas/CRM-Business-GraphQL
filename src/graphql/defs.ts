@@ -18,6 +18,8 @@ const typeDefs = `#graphql
     creado: String
   }
 
+  # PRODUCTOS
+
   type Producto  {
     descripcion: String
     existencias: Int
@@ -56,6 +58,13 @@ const typeDefs = `#graphql
     precio: Float!
     status: Int!
     id: ID!
+  }
+
+  input QueryProductos {
+    nombre: String!
+    precio: Float!
+    status: Int!
+    pagina: Int!
   }
 
   # CLIENTES
@@ -260,7 +269,7 @@ const typeDefs = `#graphql
     obtenerUsuario( input: String! ): Usuario
     
     # PRODUCTOS
-    obtenerProductos: [Producto]
+    obtenerProductos(input:QueryProductos): [Producto]
     obtenerProducto( input: String! ): Producto
 
     # CLIENTES

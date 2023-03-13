@@ -9,7 +9,7 @@ export interface ContextApp {
 
 export type GenInput<T> = {
     input: T
-    file?: any
 }
 
 export type BasicResolver<T> = ( _ : any , x : GenInput< T | null > , context: ContextApp ) => any;
+
