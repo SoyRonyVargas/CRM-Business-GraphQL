@@ -1,14 +1,23 @@
+import { ConceptoCarrito, ConceptoCarritoModel } from "../../../models/carrito/concepto"
 import handleError from "../../../utils/handleError"
 import { BasicResolver } from "types"
 
-const obtenerCarrito : BasicResolver<null> = async () => {
+const obtenerCarrito : BasicResolver<null> = async ( _ , x , ctx ) => {
 
     try
     {
         
-        // const clientes : Cliente[] = await ClienteModel.find({})
-        //     .populate("vendedor")
-        // return clientes;
+        const carrito : ConceptoCarrito[] = await ConceptoCarritoModel.find({
+            usuario: {
+                $eq: ctx.authScope
+            }
+        })
+        .populate("producto")
+        .populate("usuario")
+
+        return {
+            conceptos: carrito
+        };
 
     }
     catch(err)

@@ -27,7 +27,7 @@ const obtenerProductos : BasicResolver<QueryProductos> = async ( _ , { input } )
     try 
     {
         
-        const { pagina, nombre , status , precio } = input
+        const { pagina, nombre , status } = input
 
         const skiped = pagina * 10
 
