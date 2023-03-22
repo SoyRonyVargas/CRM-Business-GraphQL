@@ -6,3 +6,5 @@ dist/
 
 src/public/uploads/*.jpg
 src/public/uploads/*.png
+src/public/uploads/*.gif
+

@@ -4,7 +4,6 @@ import { ConceptoCarritoModel } from "../../../../models/carrito/concepto"
 import handleError from "../../../../utils/handleError"
 import { BasicResolver } from "types"
 
-
 const agregarConceptoCarrito : BasicResolver<AgregarConceptoCarrito> = async ( _ , { input } , context ) => {
     
     try
@@ -13,6 +12,12 @@ const agregarConceptoCarrito : BasicResolver<AgregarConceptoCarrito> = async ( _
         const { producto , cantidad } = input
 
         const existencias = await calcularExistenciasProducto(producto)
+
+        // console.log("existencias");
+        // console.log(existencias);
+        
+        // console.log("cantidad");
+        // console.log(cantidad);
 
         if( cantidad > existencias ) return handleError({
             msg: "Existencias insuficientes",
@@ -40,6 +45,24 @@ const agregarConceptoCarrito : BasicResolver<AgregarConceptoCarrito> = async ( _
 
 }
 
+const removerConceptoCarrito : BasicResolver<string> = async ( _ , { input } , context ) => {
+    
+    try
+    {
+        
+        await ConceptoCarritoModel.findByIdAndRemove(input)
+
+        return true
+
+    }
+    catch(err)
+    {
+        return handleError(err)
+    }
+
+}
+
 export default {
-    agregarConceptoCarrito
+    agregarConceptoCarrito,
+    removerConceptoCarrito
 }

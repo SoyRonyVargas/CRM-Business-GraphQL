@@ -288,6 +288,7 @@ const typeDefs = `#graphql
 
     # CARRITO
     agregarConceptoCarrito( input:ConceptoOrden ): ConceptoOrdenLight
+    removerConceptoCarrito( input:ID! ): Boolean
 
   }
 
@@ -311,6 +312,7 @@ const typeDefs = `#graphql
 
     # CARRITO
     obtenerCarrito: Carrito
+    obtenerNavbarCarrito: Int
 
   }
   

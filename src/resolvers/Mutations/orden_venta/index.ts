@@ -8,12 +8,14 @@ import { BasicResolver } from "types";
 export const calcularExistenciasProducto = async ( id: string ) : Promise<number> => {
 
     const entradas = await AlmacenModel.find({ 
-        id: id,
+        id_producto: {
+            $eq: id
+        },
         cantidad_restante: { "$gte": 0 },
     })
 
-    console.log("entradas")
-    console.log(entradas)
+    // console.log("entradas")
+    // console.log(entradas)
 
     let suma = 0;
 
