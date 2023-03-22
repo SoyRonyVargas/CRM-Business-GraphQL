@@ -1,8 +1,8 @@
-import { ConceptoCarritoModel } from "../../../models/carrito/concepto"
+import { ConceptoCarrito, ConceptoCarritoModel } from "../../../models/carrito/concepto"
 import handleError from "../../../utils/handleError"
 import { BasicResolver } from "types"
 
-const obtenerCarrito : BasicResolver<null> = async ( _ , __ , ctx ) => {
+const obtenerCarrito : BasicResolver<null> = async ( _ , x , ctx ) => {
 
     try
     {
