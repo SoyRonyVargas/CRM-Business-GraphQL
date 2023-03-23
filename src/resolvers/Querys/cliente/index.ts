@@ -1,5 +1,5 @@
+import { CrearCliente, QueryClientesVendedor } from "../../../models/clientes/types";
 import { ClienteModel , Cliente } from "../../../models/clientes";
-import { CrearCliente } from "../../../models/clientes/types";
 import handleError from "../../../utils/handleError";
 import { GraphQLError } from "graphql";
 import { BasicResolver } from "types";
@@ -19,14 +19,24 @@ const obtenerClientes : BasicResolver<CrearCliente> = async ( _ , { input } , co
     
 }
 
-const obtenerClientesVendedor : BasicResolver<CrearCliente> = async ( _ , __ , context ) => {
+const obtenerClientesVendedor : BasicResolver<QueryClientesVendedor> = async ( _ , { input } , context ) => {
 
     try
     {
 
-        const clientesPorVendedor : Cliente[] = await ClienteModel.find({ 
+        let query = {
             vendedor: context.authScope
-        }).populate("vendedor")
+        }
+
+        if( input.nombre )
+        {
+            query['nombre'] = {
+                $regex: input.nombre,
+                $options: 'i'
+            }
+        }
+
+        const clientesPorVendedor : Cliente[] = await ClienteModel.find(query).populate("vendedor")
 
         return clientesPorVendedor;
 

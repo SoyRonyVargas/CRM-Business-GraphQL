@@ -129,6 +129,10 @@ const typeDefs = `#graphql
     id: ID!
   }
 
+  input QueryClientesVendedor {
+    nombre: String
+  }
+
   # AUTENTICACION
 
   type Token {
@@ -303,7 +307,7 @@ const typeDefs = `#graphql
 
     # CLIENTES
     obtenerCliente( input: String! ): ClienteFull
-    obtenerClientesVendedor: [ClienteFull]
+    obtenerClientesVendedor( input:QueryClientesVendedor ): [ClienteFull]
     obtenerClientes: [ClienteFull]
 
     # ORDENES VENTAS
