@@ -10,7 +10,7 @@ export interface IOrdenVenta extends Document {
 
     fecha_entrega: string
     titulo_venta: string
-    subtotal: number
+    importe: number
     creado: string
     status: number
     total: number
@@ -36,14 +36,6 @@ const OrdenVentaSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-    },
-    subtotal: {
-        type: Number,
-        required: true,
-    },
-    total: {
-        type: Number,
-        required: true,
     },
     status: {
         type: Number,

@@ -1,12 +1,18 @@
-import { IOrdenVentaConcepto } from "./concepto"
 import { OrdenVenta, IOrdenVenta } from "."
 
 export type CrearOrdenVenta = Pick<
     OrdenVenta, 
-    "titulo_venta" | "vendedor" | "cliente" | "fecha_entrega" | "subtotal" | "total" | "status"
-> & 
+    "titulo_venta" | "vendedor" | "cliente" | "fecha_entrega" | "importe" | "total" | "status"> & 
 {
-    conceptos: IOrdenVentaConcepto[]
+    conceptos: ConceptoVenta[]
+}
+
+export type ConceptoVenta = {
+    concepto_carrito: string
+    producto: string
+    cantidad: number
+    importe: number
+    total: number
 }
 
 export type InputOrdenVentasQuery = Pick<

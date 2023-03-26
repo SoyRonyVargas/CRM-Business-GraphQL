@@ -14,6 +14,11 @@ export const OrdenVentaConceptoSchema = new mongoose.Schema({
     //     required: true,
     //     ref: "Producto"
     // },
+    concepto_carrito: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: "ConceptoCarrito"
+    },
     producto: {
         type: Schema.Types.ObjectId,
         required: true,

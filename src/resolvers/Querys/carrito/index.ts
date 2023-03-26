@@ -1,4 +1,4 @@
-import { ConceptoCarrito, ConceptoCarritoModel } from "../../../models/carrito/concepto"
+import { ConceptoCarritoModel } from "../../../models/carrito/concepto"
 import handleError from "../../../utils/handleError"
 import { BasicResolver } from "types"
 

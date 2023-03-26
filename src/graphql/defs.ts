@@ -156,46 +156,48 @@ const typeDefs = `#graphql
   interface IOrdenVenta {
     fecha_entrega: String
     titulo_venta: String
-    subtotal: Float
     creado: String
-    total: Float
-    status: Int
   }
 
   input ConceptoOrden {
+    concepto_carrito: ID
+    importe: Float!
     cantidad: Int!
-    importe: Int!
     producto: ID!
-    total: Int!
+    total: Float!
+    iva: Float!
   }
 
   type ConceptoOrdenLight {
-    producto: ID
-    usuario: ID
     importe: Float
     cantidad: Int
     total: Float
+    producto: ID
+    usuario: ID
+    iva: Float
     id: ID
   }
   
   type OrdenVentaConcepto {
     producto: Producto
     creado: String
+    importe: Float
     cantidad: Int
-    importe: Int
+    total: Float
     status: Int
+    iva: Float
     id: ID
   }
 
   input CrearOrdenVenta {
-    fecha_entrega: String!
+    #fecha_entrega: String!
     titulo_venta: String!
-    subtotal: Float!
-    creado: String!
-    vendedor: ID!
-    total: Float!
+    #importe: Float!
+    #creado: String!
+    #vendedor: ID!
+    #total: Float!
     cliente: ID!
-    status: Int!
+    #status: Int!
     conceptos: [ConceptoOrden]!
   }
   
@@ -211,15 +213,12 @@ const typeDefs = `#graphql
   }
 
   type OrdenVentaLight implements IOrdenVenta {
-    conceptos: [ID]
     fecha_entrega: String
     titulo_venta: String
-    subtotal: Float
     creado: String
+    conceptos: [ID]
     vendedor: ID
     cliente: ID
-    total: Float
-    status: Int
     id: ID
   }
   
@@ -227,12 +226,9 @@ const typeDefs = `#graphql
     conceptos: [OrdenVentaConcepto]
     fecha_entrega: String
     titulo_venta: String
-    subtotal: Float
     creado: String
     vendedor: Basic
     cliente: Basic
-    total: Float
-    status: Int
     id: ID
   }
 
@@ -260,6 +256,7 @@ const typeDefs = `#graphql
     importe: Float
     cantidad: Int
     total: Float
+    iva: Float
     id: ID
   }
 
@@ -284,7 +281,6 @@ const typeDefs = `#graphql
     eliminarCliente( input: ID! ): String
 
     # ORDEN VENTA
-    crearOrdenVenta(input: CrearOrdenVenta): OrdenVentaLight
     actualizarOrdenVenta(input: ActualizarOrdenVenta): OrdenVentaLight
 
     # ENTRADA ALMACEN
@@ -292,7 +288,8 @@ const typeDefs = `#graphql
 
     # CARRITO
     agregarConceptoCarrito( input:ConceptoOrden ): ConceptoOrdenLight
-    removerConceptoCarrito( input:ID! ): Boolean
+    removerConceptoCarrito( input:ID! ): ConceptoOrdenLight
+    crearOrdenVenta( input:CrearOrdenVenta ): OrdenVentaLight
 
   }
 

@@ -23,14 +23,13 @@ const agregarConceptoCarrito : BasicResolver<AgregarConceptoCarrito> = async ( _
             msg: "Existencias insuficientes",
         });
 
-        console.log(context);
-        
         const concepto = new ConceptoCarritoModel({
-            cantidad,
-            total: 100,
-            importe: 100,
+            usuario: context.authScope,
+            importe: input.importe,
+            total: input.total,
+            iva: input.iva,
             producto,
-            usuario: context.authScope
+            cantidad,
         })
 
         await concepto.save()
@@ -50,9 +49,15 @@ const removerConceptoCarrito : BasicResolver<string> = async ( _ , { input } , c
     try
     {
         
+        const concepto = await ConceptoCarritoModel.findById(input)
+
         await ConceptoCarritoModel.findByIdAndRemove(input)
 
-        return true
+        if( !concepto ) return handleError({
+            msg: "No se puede remover el concepto"
+        })
+
+        return concepto
 
     }
     catch(err)

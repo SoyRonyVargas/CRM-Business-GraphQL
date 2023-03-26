@@ -1,6 +1,5 @@
 import { Producto } from "../../producto";
 import mongoose, { Document, Schema } from "mongoose";
-// import { Usuario } from "../../models/usuario";
 
 interface IConceptoCarrito extends Document {
     producto: Producto
@@ -9,6 +8,7 @@ interface IConceptoCarrito extends Document {
     importe: number
     creado: string
     total: number
+    iva: number
 }
 
 export const ConceptoCarritoSchema = new mongoose.Schema({
@@ -30,12 +30,14 @@ export const ConceptoCarritoSchema = new mongoose.Schema({
     importe: {
         type: Number,
         required: true,
-        trim: true,
+    },
+    iva: {
+        type: Number,
+        required: true,
     },
     total: {
         type: Number,
         required: true,
-        trim: true,
     },
     creado: {
         type: Date,

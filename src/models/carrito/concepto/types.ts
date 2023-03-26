@@ -4,4 +4,5 @@ export type AgregarConceptoCarrito = {
     cantidad: number
     importe: number
     total: number
+    iva: number
 }
