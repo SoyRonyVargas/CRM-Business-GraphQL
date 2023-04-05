@@ -235,7 +235,6 @@ const typeDefs = `#graphql
   # ENTRADAS ALMACEN
 
   input InputConceptoEntrada {
-    id_usuario_creado: String
     cantidad_entrada: Int
     id_producto: String
   }

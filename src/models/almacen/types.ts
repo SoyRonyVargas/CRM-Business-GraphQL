@@ -1,6 +1,4 @@
-import { Almacen, IAlmacen } from "."
-
-type ConceptoAlmacen = Omit<Almacen, "_id" | "creado" | "id">
+import { Almacen } from "."
 
 export type CreateEntradaAlmacen = {
     conceptos: Almacen[]
