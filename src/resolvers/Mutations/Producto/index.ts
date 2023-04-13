@@ -13,7 +13,7 @@ const crearProducto = async ( _ , { input } : GenInput<CrearProducto> ) => {
 
         await productoNuevo.save()
 
-        return {}
+        return productoNuevo;
 
     }
     catch(err)
@@ -37,9 +37,10 @@ const actualizarProducto = async ( _ , { input } : GenInput<ActualizarProducto> 
 
         const producto = await ProductoModel.findById(input.id)
 
-        if( !producto ) return new GraphQLError( "Producto no encontrado" , {
-            extensions: { code: 'NOT_FOUND' , http: { code: 404 } },
-        });
+        if( !producto ) return handleError({
+            msg: "El producto no existe",
+            status: "200"
+        })
 
         const productoActualizado = await ProductoModel.findByIdAndUpdate( producto.id , input , { new: true })
 

@@ -1,71 +1,11 @@
 import { CrearOrdenVenta , ActualizarOrdenVenta } from "../../../models/orden/types";
 import { OrdenVentaConceptoModel } from "../../../models/orden/concepto";
+import { ProductoModel , IProducto } from "../../../models/producto";
 import { OrdenVentaModel } from "../../../models/orden";
-import { AlmacenModel } from "../../../models/almacen";
 import handleError from "../../../utils/handleError";
 import { BasicResolver } from "types";
 
-export const calcularExistenciasProducto = async ( id: string ) : Promise<number> => {
-
-    const entradas = await AlmacenModel.find({ 
-        id_producto: {
-            $eq: id
-        },
-        cantidad_restante: { "$gte": 0 },
-    })
-
-    // console.log("entradas")
-    // console.log(entradas)
-
-    let suma = 0;
-
-    for( const entrada of entradas )
-    {
-        suma += entrada.cantidad_restante 
-    }
-
-    return suma;
-
-}
-
 const extraerExistencias = async ( id: string , cantidad: number ) : Promise<boolean> => {
-
-    const entradas = await AlmacenModel.find({ 
-        id: id,
-        cantidad_restante: { "$gte": 0 },
-    })
-
-    let restante = cantidad;
-
-    for ( let i = 0; ( i < entradas.length ) ; i++ )
-    {
-        
-        const entrada = entradas[i]
-
-        restante = entrada.cantidad_restante - restante
-
-        if( restante < 0 )
-        {
-            
-            restante = Math.abs(restante)
-
-            entrada.cantidad_restante = 0
-
-            await entrada.save()
-            
-        }
-        else
-        {
-            
-            entrada.cantidad_restante = restante
-            
-            await entrada.save()
-
-            return true;
-
-        }
-
-    }
 
     return false;
 
@@ -81,7 +21,6 @@ const crearOrdenVenta : BasicResolver<CrearOrdenVenta> = async ( _ , { input } ,
         const { conceptos , ...restoOrden } = input
 
         const orden = new OrdenVentaModel(restoOrden)
-
 
         if( conceptos.length == 0 ) return handleError({
             msg: "La orden debe contener al menos un concepto"
@@ -101,17 +40,9 @@ const crearOrdenVenta : BasicResolver<CrearOrdenVenta> = async ( _ , { input } ,
             
             const conceptoVenta = new OrdenVentaConceptoModel(concepto)
 
-            // console.log("concepto")
-            // console.log(concepto)
-            // console.log(conceptoVenta)
+            const producto : IProducto = await ProductoModel.findById(concepto.producto)
 
-            const existenciasTotales = await calcularExistenciasProducto(concepto.producto)
-
-            console.log("Existencias totales");
-            
-            console.log(existenciasTotales);
-
-            if( concepto.cantidad > existenciasTotales )
+            if( concepto.cantidad > producto.existencias )
             {
                 return handleError({
                     msg: `Existencias insuficientes del producto ${concepto.producto}`,
@@ -119,10 +50,10 @@ const crearOrdenVenta : BasicResolver<CrearOrdenVenta> = async ( _ , { input } ,
                 })
             }
 
-            await extraerExistencias(
-                conceptoVenta.producto.id as string,
-                conceptoVenta.cantidad
-            )
+            // await extraerExistencias(
+            //     conceptoVenta.producto.id as string,
+            //     conceptoVenta.cantidad
+            // )
 
             orden.conceptos.push(conceptoVenta.id);
 

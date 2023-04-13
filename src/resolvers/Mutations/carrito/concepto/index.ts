@@ -1,7 +1,7 @@
-import { calcularExistenciasProducto } from "../../../../resolvers/mutations/orden_venta"
 import { AgregarConceptoCarrito } from "../../../../models/carrito/concepto/types"
 import { ConceptoCarritoModel } from "../../../../models/carrito/concepto"
 import handleError from "../../../../utils/handleError"
+import QueryProducto from '../../../Querys/Producto'
 import { BasicResolver } from "types"
 
 const agregarConceptoCarrito : BasicResolver<AgregarConceptoCarrito> = async ( _ , { input } , context ) => {
@@ -11,15 +11,17 @@ const agregarConceptoCarrito : BasicResolver<AgregarConceptoCarrito> = async ( _
         
         const { producto , cantidad } = input
 
-        const existencias = await calcularExistenciasProducto(producto)
-
         // console.log("existencias");
         // console.log(existencias);
         
         // console.log("cantidad");
         // console.log(cantidad);
 
-        if( cantidad > existencias ) return handleError({
+        const _producto = await QueryProducto.obtenerProducto( null , { 
+            input: producto
+        })
+
+        if( cantidad > _producto.existencias ) return handleError({
             msg: "Existencias insuficientes",
         });
 

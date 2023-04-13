@@ -44,6 +44,7 @@ const typeDefs = `#graphql
   
   input CrearProducto {
     descripcion: String!
+    existencias: Int!
     imagen: [String]!
     nombre: String!
     precio: Float!
@@ -52,7 +53,7 @@ const typeDefs = `#graphql
   
   input ActualizarProducto {
     descripcion: String!
-    # existencias: Int!
+    existencias: Int!
     imagen: [String]!
     nombre: String!
     precio: Float!
