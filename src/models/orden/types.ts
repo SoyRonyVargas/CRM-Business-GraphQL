@@ -7,6 +7,12 @@ export type CrearOrdenVenta = Pick<
     conceptos: ConceptoVenta[]
 }
 
+export type InputActualizarStatus = {
+    id_concepto: string
+    id_orden: string
+    status: number
+}
+
 export type ConceptoVenta = {
     concepto_carrito: string
     producto: string

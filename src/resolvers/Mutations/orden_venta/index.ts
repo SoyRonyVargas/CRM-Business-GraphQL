@@ -1,4 +1,4 @@
-import { CrearOrdenVenta , ActualizarOrdenVenta } from "../../../models/orden/types";
+import { CrearOrdenVenta , ActualizarOrdenVenta, InputActualizarStatus } from "../../../models/orden/types";
 import { OrdenVentaConceptoModel } from "../../../models/orden/concepto";
 import { ConceptoCarritoModel } from "../../../models/carrito/concepto";
 import { ProductoModel , IProducto } from "../../../models/producto";
@@ -25,6 +25,38 @@ const extraerExistencias = async ( id_producto: string , cantidad: number ) : Pr
 
 }
 
+const actualizarStatusConceptoOrdenVenta:BasicResolver<InputActualizarStatus> = async ( _ , { input } ) => {
+
+    try
+    {
+
+        const concepto = await OrdenVentaConceptoModel.findById(input.id_concepto)
+        
+        concepto.status = input.status
+
+        await concepto.save()
+
+        const ordenVenta = await OrdenVentaModel.findById(input.id_orden)
+            .populate("conceptos")
+        
+        const terminado = ordenVenta.conceptos.every( concepto => concepto.status == 1 )
+
+        if( terminado )
+        {
+            ordenVenta.status = 1
+            await ordenVenta.save()
+        }
+
+        return true;
+
+    }
+    catch
+    {
+        return false;
+    }
+
+}
+
 const crearOrdenVenta : BasicResolver<CrearOrdenVenta> = async ( _ , { input } , context ) => {
     
     try
@@ -42,7 +74,7 @@ const crearOrdenVenta : BasicResolver<CrearOrdenVenta> = async ( _ , { input } ,
         
         orden.fecha_entrega = new Date().toISOString()
 
-        orden.status = 1;
+        orden.status = 0;
 
         console.log("conceptos")
         console.log(conceptos)
@@ -67,7 +99,7 @@ const crearOrdenVenta : BasicResolver<CrearOrdenVenta> = async ( _ , { input } ,
 
 
             // LE PONES DE STATUS ACTIVO
-            conceptoVenta.status = 1
+            conceptoVenta.status = 0
             
             // A LA ORDEN LE AGREGAMOS EL CONCEPTO
             orden.conceptos.push(conceptoVenta.id);
@@ -132,6 +164,7 @@ const actualizarOrdenVenta : BasicResolver<ActualizarOrdenVenta> = async ( _ , {
 }
 
 export default {
+    actualizarStatusConceptoOrdenVenta,
     actualizarOrdenVenta,
     crearOrdenVenta
 }

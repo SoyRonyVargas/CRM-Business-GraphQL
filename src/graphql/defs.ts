@@ -215,6 +215,7 @@ const typeDefs = `#graphql
     importe: Float
     cliente: Basic
     total: Float
+    status: Int
     iva: Float
     id: ID
   }
@@ -238,9 +239,10 @@ const typeDefs = `#graphql
     conceptos: [OrdenVentaConcepto]
     fecha_entrega: String
     titulo_venta: String
-    creado: String
     vendedor: Basic
     cliente: Basic
+    creado: String
+    status: Int
     id: ID
   }
 
@@ -271,6 +273,12 @@ const typeDefs = `#graphql
     id: ID
   }
   
+  input InputActualizarStatus {
+    id_concepto: String
+    id_orden: String
+    status: Int
+  }
+
   # QUERY Y MUTATION
 
   type Mutation {
@@ -293,6 +301,7 @@ const typeDefs = `#graphql
 
     # ORDEN VENTA
     actualizarOrdenVenta(input: ActualizarOrdenVenta): OrdenVentaLight
+    actualizarStatusConceptoOrdenVenta(input:InputActualizarStatus): Boolean
 
     # ENTRADA ALMACEN
     crearEntradaAlmacen(input:CreateEntradaAlmacen): Boolean

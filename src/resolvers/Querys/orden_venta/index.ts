@@ -30,7 +30,6 @@ const obtenerOrdenesVenta:BasicResolver<InputOrdenVentasQuery> = async ( _ , { i
         let ordenesVenta = await OrdenVentaModel
             .find({ 
                 vendedor: context.authScope, 
-                status: 1,
             })
             .sort({
                 creado: -1
@@ -59,6 +58,7 @@ const obtenerOrdenesVenta:BasicResolver<InputOrdenVentasQuery> = async ( _ , { i
 
             const orden_basica = {
                 id: orden.id,
+                status: orden.status,
                 total_productos: orden.conceptos.length,
                 titulo_venta: orden.titulo_venta,
                 creado: orden.creado,
@@ -67,8 +67,6 @@ const obtenerOrdenesVenta:BasicResolver<InputOrdenVentasQuery> = async ( _ , { i
                 total,
                 iva,
             }
-
-            console.log(orden_basica);
 
             response.push(orden_basica)
 

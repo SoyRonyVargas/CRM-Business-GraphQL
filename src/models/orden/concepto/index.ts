@@ -5,9 +5,9 @@ export interface IOrdenVentaConcepto extends Document {
     producto: Producto
     cantidad: number
     importe: number
+    status:  number
     total: number
     iva: number
-    status:  1 | 2 | 3
 }
 
 export const OrdenVentaConceptoSchema = new mongoose.Schema({
