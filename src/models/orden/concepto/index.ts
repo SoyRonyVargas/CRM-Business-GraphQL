@@ -1,19 +1,16 @@
-import { Producto } from "../../producto";
 import mongoose, { Schema } from "mongoose";
+import { Producto } from "../../producto";
 
 export interface IOrdenVentaConcepto extends Document {
     producto: Producto
     cantidad: number
     importe: number
+    total: number
+    iva: number
     status:  1 | 2 | 3
 }
 
 export const OrdenVentaConceptoSchema = new mongoose.Schema({
-    // id_orden_venta: {
-    //     type: Schema.Types.ObjectId,
-    //     required: true,
-    //     ref: "Producto"
-    // },
     concepto_carrito: {
         type: Schema.Types.ObjectId,
         required: true,
@@ -30,6 +27,16 @@ export const OrdenVentaConceptoSchema = new mongoose.Schema({
         trim: true
     },
     importe: {
+        type: Number,
+        required: true,
+        trim: true,
+    },
+    iva: {
+        type: Number,
+        required: true,
+        trim: true,
+    },
+    total: {
         type: Number,
         required: true,
         trim: true,

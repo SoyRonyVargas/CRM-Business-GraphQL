@@ -4,45 +4,77 @@ import handleError from "../../../utils/handleError";
 import { BasicResolver } from "types";
 
 
-const obtenerOrdenesVentaUsuario : BasicResolver<InputOrdenVentasQuery> = async ( _ , { input } , context ) => {
+const obtenerOrdenesVenta:BasicResolver<InputOrdenVentasQuery> = async ( _ , { input } , context ) => {
 
     try
     {
 
-        const { 
-            fecha_inicio,
-            fecha_fin
-        } = input
+        // const { 
+        //     fecha_inicio,
+        //     fecha_fin
+        // } = input
 
+        // let ordenesVenta = await OrdenVentaModel
+        //     .find({ 
+        //         vendedor: context.authScope, 
+        //         status: input.status,
+        //         creado: {
+        //             $gte: new Date(fecha_inicio),
+        //             $lt: new Date(fecha_fin)
+        //         }
+        //     })
+        //     .populate(["vendedor", "cliente", "conceptos"])
+        //     .populate({ path: "conceptos" , populate: "producto" })
+        //     .exec()
+        
         let ordenesVenta = await OrdenVentaModel
             .find({ 
                 vendedor: context.authScope, 
-                status: input.status,
-                creado: {
-                    $gte: new Date(fecha_inicio),
-                    $lt: new Date(fecha_fin)
-                }
+                status: 1,
+            })
+            .sort({
+                creado: -1
             })
             .populate(["vendedor", "cliente", "conceptos"])
             .populate({ path: "conceptos" , populate: "producto" })
             .exec()
         
+        let response = []
+
         for( const orden of ordenesVenta )
         {
             
-            // orden.creado = new Date(orden.creado).toString();
-            
+            let total = 0;
+            let importe = 0;
+            let iva = 0;
+
             orden.creado.toString()   
 
-            // orden.creado = "sexo";
-            
-            // orden.fecha_entrega = "sexo";
-            
-            console.log(orden);
+            for( const concepto of orden.conceptos )
+            {
+                importe += concepto.importe;
+                total += concepto.total;
+                iva += concepto.iva;
+            }
+
+            const orden_basica = {
+                id: orden.id,
+                total_productos: orden.conceptos.length,
+                titulo_venta: orden.titulo_venta,
+                creado: orden.creado,
+                cliente: orden.cliente,
+                importe,
+                total,
+                iva,
+            }
+
+            console.log(orden_basica);
+
+            response.push(orden_basica)
 
         }
 
-        return ordenesVenta
+        return response
 
     }
     catch(err)
@@ -52,7 +84,7 @@ const obtenerOrdenesVentaUsuario : BasicResolver<InputOrdenVentasQuery> = async 
 
 }
 
-const obtenerOrdenenPorId : BasicResolver<string> = async ( _ , { input } ) => {
+const obtenerOrdenenId : BasicResolver<string> = async ( _ , { input } ) => {
 
     try
     {
@@ -78,6 +110,6 @@ const obtenerOrdenenPorId : BasicResolver<string> = async ( _ , { input } ) => {
 }
 
 export default {
-    obtenerOrdenesVentaUsuario,
-    obtenerOrdenenPorId,
+    obtenerOrdenesVenta,
+    obtenerOrdenenId,
 }

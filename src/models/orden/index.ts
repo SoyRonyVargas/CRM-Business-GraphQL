@@ -1,10 +1,11 @@
 // import { populateFields } from "../../utils/populateFields";
 import mongoose, { Schema , Document } from "mongoose";
+import { IOrdenVentaConcepto } from './concepto'
 
 export interface IOrdenVenta extends Document {
     
     // REFERENCIAS
-    conceptos: Array<string>
+    conceptos: IOrdenVentaConcepto[]
     vendedor: string
     cliente: string
 

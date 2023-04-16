@@ -30,8 +30,6 @@ const crearOrdenVenta : BasicResolver<CrearOrdenVenta> = async ( _ , { input } ,
     try
     {
 
-        console.log("empeze orden venta");
-
         const { conceptos , ...restoOrden } = input
 
         const orden = new OrdenVentaModel(restoOrden)
@@ -94,7 +92,7 @@ const crearOrdenVenta : BasicResolver<CrearOrdenVenta> = async ( _ , { input } ,
 
         await orden.save()
 
-        return orden
+        return orden.id
 
     }
     catch(err)

@@ -1,7 +1,7 @@
 import { AgregarConceptoCarrito } from "../../../../models/carrito/concepto/types"
 import { ConceptoCarritoModel } from "../../../../models/carrito/concepto"
 import handleError from "../../../../utils/handleError"
-import QueryProducto from '../../../Querys/Producto'
+import QueryProducto from '../../../querys/producto'
 import { BasicResolver } from "types"
 
 const agregarConceptoCarrito : BasicResolver<AgregarConceptoCarrito> = async ( _ , { input } , context ) => {
