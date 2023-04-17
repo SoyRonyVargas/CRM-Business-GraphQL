@@ -56,6 +56,15 @@ const obtenerOrdenesVenta:BasicResolver<InputOrdenVentasQuery> = async ( _ , { i
                 iva += concepto.iva;
             }
 
+            if( isNaN(total) )
+            {
+                total = 0
+            }
+            if( isNaN(iva) )
+            {
+                iva = 0
+            }
+
             const orden_basica = {
                 id: orden.id,
                 status: orden.status,
@@ -71,6 +80,8 @@ const obtenerOrdenesVenta:BasicResolver<InputOrdenVentasQuery> = async ( _ , { i
             response.push(orden_basica)
 
         }
+
+        console.log(response);
 
         return response
 
