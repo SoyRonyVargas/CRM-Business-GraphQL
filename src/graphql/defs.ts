@@ -134,6 +134,11 @@ const typeDefs = `#graphql
     nombre: String
   }
 
+  type MejorCliente {
+    cliente: [ClienteFull]
+    total: Float
+  }
+
   # AUTENTICACION
 
   type Token {
@@ -335,6 +340,10 @@ const typeDefs = `#graphql
     # CARRITO
     obtenerCarrito: Carrito
     obtenerNavbarCarrito: Int
+
+    # AVANZADOS
+
+    mejoresClientes: [MejorCliente]
 
   }
   

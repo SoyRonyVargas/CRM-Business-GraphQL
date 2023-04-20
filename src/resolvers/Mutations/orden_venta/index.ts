@@ -85,6 +85,9 @@ const crearOrdenVenta : BasicResolver<CrearOrdenVenta> = async ( _ , { input } ,
             // CREAMOS EL CONCEPTO DE LA ORDEN DE VENTA
             const conceptoVenta = new OrdenVentaConceptoModel(concepto)
 
+            // ASIGNAMOS LA LLAVE FORAREA DE LA ORDEN DE VENTA            
+            conceptoVenta.orden_venta = orden.id
+            
             // BUSCAMOS EL PRODUCTO DEL CONCEPTO
             const producto : IProducto = await ProductoModel.findById(concepto.producto)
 
