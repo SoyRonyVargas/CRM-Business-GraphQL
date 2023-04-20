@@ -1,8 +1,44 @@
 import { CrearCliente, QueryClientesVendedor } from "../../../models/clientes/types";
 import { ClienteModel , Cliente } from "../../../models/clientes";
+import { OrdenVentaModel } from "../../../models/orden";
 import handleError from "../../../utils/handleError";
 import { GraphQLError } from "graphql";
 import { BasicResolver } from "types";
+
+const mejoresClientes:BasicResolver<null> = async ( _ , __ , context ) => {
+
+    try
+    {
+
+        const ventasPorCliente = await OrdenVentaModel.aggregate([
+            { $match: { status: 1 } },
+            { 
+                $group: {
+                    _id: "$cliente",
+                }
+            },
+            {
+                $lookup: {
+                    from: ""
+                }
+            }
+        ])
+    
+        // for await( enta)
+
+        console.log(ventasPorCliente)
+
+        return ventasPorCliente;
+
+    }
+    catch
+    {
+        return handleError({
+            msg: "Error del servidor"
+        })
+    }
+
+}
 
 const obtenerClientes : BasicResolver<CrearCliente> = async ( _ , { input } , context ) => {
 
@@ -75,5 +111,6 @@ const obtenerCliente : BasicResolver<string> = async ( _ , { input } ) => {
 export default {
     obtenerClientesVendedor,
     obtenerClientes,
+    mejoresClientes,
     obtenerCliente
 }

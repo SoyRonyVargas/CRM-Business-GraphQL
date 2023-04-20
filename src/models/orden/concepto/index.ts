@@ -2,6 +2,7 @@ import mongoose, { Schema } from "mongoose";
 import { Producto } from "../../producto";
 
 export interface IOrdenVentaConcepto extends Document {
+    orden_venta: string
     producto: Producto
     cantidad: number
     importe: number
@@ -15,6 +16,11 @@ export const OrdenVentaConceptoSchema = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         required: true,
         ref: "ConceptoCarrito"
+    },
+    orden_venta: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: "OrdenVenta"
     },
     producto: {
         type: Schema.Types.ObjectId,
