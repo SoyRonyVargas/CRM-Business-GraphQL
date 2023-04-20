@@ -22,9 +22,6 @@ const crearToken = ( payload : CrearUsuario ) : string | null => {
             configToken
         )
 
-        console.log("env");
-        console.log(process.env.SECRET_JWT_TOKEN);
-
         return token
 
     }

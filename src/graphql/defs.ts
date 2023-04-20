@@ -336,6 +336,9 @@ const typeDefs = `#graphql
     obtenerCarrito: Carrito
     obtenerNavbarCarrito: Int
 
+    # AVANZADOS
+    obtenerMejoresVendedores: 
+
   }
   
 `;

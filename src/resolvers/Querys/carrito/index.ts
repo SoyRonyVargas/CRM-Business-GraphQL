@@ -34,9 +34,6 @@ const obtenerNavbarCarrito : BasicResolver<null> = async ( _ , __ , ctx ) => {
             usuario: ctx.authScope
         })
 
-        console.log(conceptos);
-        console.log(ctx.authScope);
-        
         return conceptos.length
 
     }

@@ -2,7 +2,7 @@ import verificarToken from "../utils/verificarToken"
 import { GraphQLError } from "graphql";
 import { IContext } from "types"
 
-const ContextFn : IContext = async ({ req , res } ) => {
+const ContextFn : IContext = async ({ req }) => {
   
     const token : string = req.headers['authorization'];
   
