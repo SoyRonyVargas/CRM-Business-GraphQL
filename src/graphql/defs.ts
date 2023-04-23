@@ -138,6 +138,11 @@ const typeDefs = `#graphql
     cliente: [ClienteFull]
     total: Float
   }
+  
+  type MejorVendedor {
+    vendedor: [Usuario]
+    total: Float
+  }
 
   # AUTENTICACION
 
@@ -344,6 +349,7 @@ const typeDefs = `#graphql
     # AVANZADOS
 
     mejoresClientes: [MejorCliente]
+    mejoresVendedores: [MejorVendedor]
 
   }
   

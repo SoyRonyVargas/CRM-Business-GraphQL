@@ -11,31 +11,71 @@ const mejoresClientes:BasicResolver<null> = async ( _ , __ , context ) => {
     {
 
         const ventasPorCliente = await OrdenVentaModel.aggregate([
-            { $match: { status: 1 } },
-            { 
-                $group: {
-                    _id: "$cliente",
+            {
+                $lookup: {
+                    from: "ordenventaconceptos",
+                    localField: "conceptos",
+                    foreignField: "_id",
+                    as: "conceptos"
                 }
+            },
+            { 
+                $match: { 
+                    status: 1 
+                } 
             },
             {
                 $lookup: {
-                    from: ""
+                    from: "clientes",
+                    localField: "cliente",
+                    foreignField: "_id",
+                    as: "cliente"
+                }
+            }, 
+            { 
+                $group: {
+                    _id: "$cliente",
+                    cliente: {
+                        $first: "$cliente"
+                    },
+                    total: {
+                        $sum: {
+                            $sum: "$conceptos.total"
+                        }
+                    },
+                },
+            },
+            {
+                $sort: {
+                    total: -1
                 }
             }
         ])
-    
-        // for await( enta)
 
-        console.log(ventasPorCliente)
+        console.log(ventasPorCliente);
+
+        for( const campo of ventasPorCliente )
+        {
+            console.log(campo.cliente);
+            for( const cliente of campo.cliente )
+            {
+                // console.log('cliente');
+                // console.log(cliente);
+            }
+        }
 
         return ventasPorCliente;
 
     }
-    catch
+    catch(err)
     {
+        
+        console.log(err);
+
         return handleError({
             msg: "Error del servidor"
         })
+
     }
 
 }
